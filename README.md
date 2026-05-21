@@ -7,7 +7,7 @@
 Install the latest release with the bootstrap script:
 
 ```sh
-curl --proto '=https' --tlsv1.2 -LsSf https://github.com/tx3-lang/up/releases/latest/download/tx3up-installer.sh | sh
+curl --proto '=https' --tlsv1.2 -LsSf https://github.com/tx3-lang/tx3up/releases/latest/download/tx3up-installer.sh | sh
 ```
 
 Once `tx3up` is on your `PATH`, it manages itself and the rest of the toolchain.
