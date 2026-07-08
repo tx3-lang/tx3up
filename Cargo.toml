@@ -6,6 +6,7 @@ description = "Installer for the tx3 toolchain"
 authors = ["TxPipe <hello@txpipe.com>"]
 license = "Apache-2.0"
 repository = "https://github.com/tx3-lang/tx3up"
+homepage = "https://github.com/tx3-lang/tx3up"
 
 [dependencies]
 self-replace = "1.5.0"
@@ -35,4 +36,4 @@ push = false
 publish = false
 tag-name = "v{{version}}"
 pre-release-commit-message = "release: v{{version}}"
-pre-release-hook = ["git", "cliff", "-o", "CHANGELOG.md", "--tag", "v{{version}}"]
+pre-release-hook = ["git", "cliff", "-o", "CHANGELOG.md", "--latest"]
