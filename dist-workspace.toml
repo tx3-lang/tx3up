@@ -5,8 +5,10 @@ members = ["cargo:."]
 [dist]
 cargo-dist-version = "0.31.0"
 ci = "github"
-installers = []
+installers = ["shell", "homebrew"]
+tap = "txpipe/homebrew-tap"
 targets = ["aarch64-apple-darwin", "aarch64-unknown-linux-gnu", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-msvc"]
+publish-jobs = ["homebrew"]
 publish-prereleases = true
 pr-run-mode = "plan"
 install-updater = false
