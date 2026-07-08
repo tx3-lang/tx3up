@@ -20,16 +20,11 @@ pub fn build_octocrab(config: &Config) -> anyhow::Result<Octocrab> {
     builder.build().context("building octocrab client")
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
 pub enum Installer {
+    #[default]
     GithubRelease,
     Instructions,
-}
-
-impl Default for Installer {
-    fn default() -> Self {
-        Self::GithubRelease
-    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

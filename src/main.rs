@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 use std::path::PathBuf;
 
 use anyhow::{Context, Result};
@@ -175,7 +176,7 @@ async fn main() -> anyhow::Result<()> {
         github_token: cli.github_token,
     };
 
-    let skip_banner = cli.command.as_ref().map_or(false, |c| c.skip_banner());
+    let skip_banner = cli.command.as_ref().is_some_and(|c| c.skip_banner());
 
     if !skip_banner {
         banner::print_banner(&config);
