@@ -61,7 +61,7 @@ fn text_output(
         println!("You have {} update/s to install 📦", updates.len());
     } else {
         for update in updates {
-            print_update(&update, &manifest)?;
+            print_update(update, manifest)?;
         }
     }
 

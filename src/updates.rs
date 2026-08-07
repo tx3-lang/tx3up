@@ -50,10 +50,10 @@ async fn evaluate_update(tool: &Tool, config: &Config) -> anyhow::Result<Option<
     let current = find_installed_version(tool, config).await?;
     let requested = VersionReq::parse(&tool.version)?;
 
-    if let Some(current) = &current {
-        if requested.matches(&current) {
-            return Ok(None);
-        }
+    if let Some(current) = &current
+        && requested.matches(current)
+    {
+        return Ok(None);
     }
 
     Ok(Some(Update {

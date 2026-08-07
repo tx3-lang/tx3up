@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 use std::path::PathBuf;
 
 use anyhow::{Context, Result};
@@ -111,14 +112,21 @@ impl Config {
         let fixed_channel_dir = self.fixed_channel_dir();
         let channel_dir = self.root_dir().join(channel);
 
-        // Remove existing symlink if it exists
+        // Remove existing symlink if it exists. Windows models a symlink to a
+        // directory as a directory entry, so it needs remove_dir, not remove_file.
         if fixed_channel_dir.exists() {
+            #[cfg(unix)]
             std::fs::remove_file(&fixed_channel_dir)?;
+            #[cfg(windows)]
+            std::fs::remove_dir(&fixed_channel_dir)?;
         }
 
         std::fs::create_dir_all(&channel_dir)?;
 
+        #[cfg(unix)]
         std::os::unix::fs::symlink(&channel_dir, &fixed_channel_dir)?;
+        #[cfg(windows)]
+        std::os::windows::fs::symlink_dir(&channel_dir, &fixed_channel_dir)?;
 
         Ok(())
     }
@@ -175,7 +183,7 @@ async fn main() -> anyhow::Result<()> {
         github_token: cli.github_token,
     };
 
-    let skip_banner = cli.command.as_ref().map_or(false, |c| c.skip_banner());
+    let skip_banner = cli.command.as_ref().is_some_and(|c| c.skip_banner());
 
     if !skip_banner {
         banner::print_banner(&config);

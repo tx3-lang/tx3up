@@ -1,4 +1,4 @@
-use color_print::{cprintln, cstr};
+use color_print::cprintln;
 
 use crate::Config;
 
